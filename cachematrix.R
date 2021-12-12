@@ -2,41 +2,45 @@
 ## functions do
 
 ## Write a short comment describing this function
-# set the value of the matrix
-# get the value of the matrix
-# set the value of the inverse
-# get the value of the inverse
+#create matrix 
+#create null object
+#create inverse of matrix
 
 
-makeCacheMatrix <- function(x = matrix()) {
-        i <- NULL
+makeCacheMatrix <- function(store_in_cache = matrix()) {
+        create_null_object <- NULL
         set <- function(y) {
-                 x <<- y
-                 i <<- NULL
+                 store_in_cache <<- y
+                 create_null_object <<- NULL
         }
-        get <- function() x
-         setinverse <- function(inverse) i <<- inverse
-        getinverse <- function() i
-        list(set = set,
+        get <- function() store_in_cache
+         setsolve <- function(solve) 
+		 create_null_object <<- solve
+        
+		getsolve <- function() create_null_object
+        
+		list(set = set,
               get = get,
-             setinverse = setinverse,
-             getinverse = getinverse)
+             setsolve = setsolve,
+             getsolve = getsolve)
 }
 
 
-## Write a short comment describing this function
-# This function computes the inverse of the special "matrix" 
-# returned by makeCacheMatrix above.
+#check if anything in cache
+#if something is available, get the result
 
 
-cacheSolve <- function(x, ...) {
-        i <- x$getinverse()
-         if (!is.null(i)) {
-                message("getting cached data")
-                return(i)
+cacheSolve <- function(matrix, ...) {
+        solution <- matrix$getsolve()
+         if (!is.null(solution)) {
+                message("getting inverse")
+                return(solution)
         }
-         data <- x$get()
-        i <- solve(data, ...)
-         x$setinverse(i)
-        i
+         data <- matrix$get()
+        solution <- solve(data, ...)
+         matrix$setsolve(solution)
+        solution
 }
+
+
+
